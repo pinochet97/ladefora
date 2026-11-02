@@ -1,0 +1,30 @@
+const AG=[{"when": "2026-11-02T22:30:00-03:00", "kind": "story", "files": ["destaques/pe_00_capa.jpg"], "text": ""}, {"when": "2026-11-02T22:32:00-03:00", "kind": "story", "files": ["destaques/pe_01_perfumes.jpg"], "text": ""}, {"when": "2026-11-02T22:34:00-03:00", "kind": "story", "files": ["destaques/pe_02_perfumes.jpg"], "text": ""}, {"when": "2026-11-02T22:36:00-03:00", "kind": "story", "files": ["destaques/pe_03_bolsas.jpg"], "text": ""}, {"when": "2026-11-02T22:38:00-03:00", "kind": "story", "files": ["destaques/pe_04_bolsas.jpg"], "text": ""}, {"when": "2026-11-02T22:40:00-03:00", "kind": "story", "files": ["destaques/pe_05_bolsas.jpg"], "text": ""}, {"when": "2026-11-02T22:42:00-03:00", "kind": "story", "files": ["destaques/pe_06_relogios.jpg"], "text": ""}, {"when": "2026-11-02T22:44:00-03:00", "kind": "story", "files": ["destaques/pe_07_esportivos.jpg"], "text": ""}, {"when": "2026-11-02T22:46:00-03:00", "kind": "story", "files": ["destaques/pe_08_short-boss.jpg"], "text": ""}, {"when": "2026-11-02T22:48:00-03:00", "kind": "story", "files": ["destaques/ce_00_capa.jpg"], "text": ""}, {"when": "2026-11-02T22:50:00-03:00", "kind": "story", "files": ["destaques/ce_01_dois-jeitos.jpg"], "text": ""}, {"when": "2026-11-02T22:52:00-03:00", "kind": "story", "files": ["destaques/ce_02_passos.jpg"], "text": ""}, {"when": "2026-11-02T22:54:00-03:00", "kind": "story", "files": ["destaques/ce_03_prazo-bf.jpg"], "text": ""}, {"when": "2026-11-02T22:56:00-03:00", "kind": "story", "files": ["destaques/bf_00_capa.jpg"], "text": ""}, {"when": "2026-11-02T22:58:00-03:00", "kind": "story", "files": ["destaques/bf_01_iphone_1.jpg"], "text": ""}, {"when": "2026-11-02T23:00:00-03:00", "kind": "story", "files": ["destaques/bf_02_iphone_2.jpg"], "text": ""}, {"when": "2026-11-02T23:02:00-03:00", "kind": "story", "files": ["destaques/bf_03_mac_ipad_1.jpg"], "text": ""}, {"when": "2026-11-02T23:04:00-03:00", "kind": "story", "files": ["destaques/bf_04_watch_airpods_1.jpg"], "text": ""}, {"when": "2026-11-02T23:06:00-03:00", "kind": "story", "files": ["destaques/bf_05_perfumes_1.jpg"], "text": ""}, {"when": "2026-11-02T23:08:00-03:00", "kind": "story", "files": ["destaques/bf_06_jbl_1.jpg"], "text": ""}, {"when": "2026-11-02T23:10:00-03:00", "kind": "story", "files": ["destaques/bf_07_tem-mais.jpg"], "text": ""}, {"when": "2026-11-02T23:12:00-03:00", "kind": "story", "files": ["destaques/sn_00_capa.jpg"], "text": ""}, {"when": "2026-11-02T23:14:00-03:00", "kind": "story", "files": ["destaques/sn_01.jpg"], "text": ""}, {"when": "2026-11-02T23:16:00-03:00", "kind": "story", "files": ["destaques/sn_02.jpg"], "text": ""}, {"when": "2026-11-02T23:18:00-03:00", "kind": "story", "files": ["destaques/dv_00_capa.jpg"], "text": ""}, {"when": "2026-11-02T23:20:00-03:00", "kind": "story", "files": ["destaques/dv_01.jpg"], "text": ""}, {"when": "2026-11-02T23:22:00-03:00", "kind": "story", "files": ["destaques/dv_02.jpg"], "text": ""}, {"when": "2026-11-02T23:24:00-03:00", "kind": "story", "files": ["destaques/cv_00_capa.jpg"], "text": ""}, {"when": "2026-11-02T23:26:00-03:00", "kind": "story", "files": ["destaques/cv_01.jpg"], "text": ""}];
+const WS='2395c3d9-e65c-439e-822c-8c89ab82f075', IG='6ca1b917-83ee-417c-8c96-5f84f76a45ea', FB='b7d39359-5574-4516-aee9-3c61ca471d51';
+const SB='https://cwaiyzlyotnmpqsznuda.supabase.co', A='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3YWl5emx5b3RubXBxc3pudWRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4MTQzNjMsImV4cCI6MjA4MzM5MDM2M30.5jH1x7LreanIYoq4G0x28SonXP1jx0eHUQiN2Mrza3s';
+const RAW='https://raw.githubusercontent.com/pinochet97/ladefora/124c2c0ebea5d533709a543541c8ffc4c603dcb6/artes/';
+const tk=JSON.parse(localStorage.getItem(Object.keys(localStorage).find(k=>/auth-token/.test(k))));
+const H={apikey:A,Authorization:'Bearer '+tk.access_token};
+const uid=tk.user.id; const log=[]; window.__fslog=log;
+for (const [n,p] of AG.entries()){
+  try{
+    const assets=[];
+    for (const f of p.files){
+      const b=await (await fetch(RAW+f)).blob(); if(b.size<5000) throw new Error('imagem nao baixou '+f);
+      const path=WS+'/'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';
+      const up=await fetch(SB+'/storage/v1/object/social-media/'+path,{method:'POST',headers:{...H,'Content-Type':'image/jpeg','x-upsert':'false'},body:b});
+      if(!up.ok) throw new Error('upload '+up.status+' '+(await up.text()));
+      assets.push({id:crypto.randomUUID(),url:SB+'/storage/v1/object/public/social-media/'+path,type:'image',name:f.split('/').pop(),size:b.size,path});
+    }
+    const post={workspace_id:WS,author_id:uid,content:p.text,content_hash:'ldf-dq-'+n+'-'+Date.now(),hashtags:[],assets,status:'pending_approval',scheduled_at:new Date(p.when).toISOString()};
+    const r=await fetch(SB+'/rest/v1/posts',{method:'POST',headers:{...H,'Content-Type':'application/json',Prefer:'return=representation'},body:JSON.stringify(post)});
+    const j=await r.json(); if(!r.ok) throw new Error('post '+JSON.stringify(j));
+    const pid=j[0].id;
+    const ch=p.kind==='story'?[{post_id:pid,social_profile_id:IG,provider:'instagram',status:'scheduled',provider_payload:{post_format:'story'}}]:[{post_id:pid,social_profile_id:IG,provider:'instagram',status:'scheduled',provider_payload:null},{post_id:pid,social_profile_id:FB,provider:'facebook',status:'scheduled',provider_payload:null}];
+    const rc=await fetch(SB+'/rest/v1/post_channels',{method:'POST',headers:{...H,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(ch)});
+    if(!rc.ok) throw new Error('canais '+(await rc.text()));
+    const ra=await fetch(SB+'/rest/v1/approvals',{method:'POST',headers:{...H,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({post_id:pid,requested_by:uid,status:'pending'})});
+    if(!ra.ok) throw new Error('aprovacao '+(await ra.text()));
+    log.push([n,p.when,p.kind,'ok',pid]);
+  }catch(e){ log.push([n,p.when,p.kind,'ERRO',String(e)]); }
+}
+window.__fsdone=true; log.length
