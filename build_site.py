@@ -57,7 +57,7 @@ for r in PRE:
 for k, r in enumerate(SEM):
     im, mode = pimg(r['i'])
     prods.append(dict(id=f's{k}', n=short(r['nome']), c='seminovo', p=r['preco'], img=im, m=mode,
-                      s=['Seminovo grade A', 'Por encomenda, chega com a Black Friday'], t='enc'))
+                      s=['Seminovo grade A', 'Por encomenda, chega na próxima leva'], t='enc'))
 for k, r in enumerate(PE):
     name = f'pe{k:02d}.webp'
     if not os.path.exists(os.path.join(IMG, name)): im = Image.open(r['img']); im.thumbnail((720, 720)); im.save(os.path.join(IMG, name), quality=82, method=4)
