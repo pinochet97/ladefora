@@ -55,7 +55,10 @@ for r in PRE:
     im, mode = pimg(r['i'])
     sp = specs(r['i'])
     if r['i'] == 7: sp = ['Versão com chip físico + eSIM'] + sp
-    prods.append(dict(id=f"e{r['i']}", n=short(r['nome']), c=CAT[r['cat']], p=r['preco'], img=im, m=mode, s=sp, t='enc'))
+    if r['i'] == 74: sp = ['Com leitor de disco (mídia física)', 'SSD de 1TB', 'Voltagem confirmada no WhatsApp antes do pedido'] + sp
+    if r['i'] == 75: sp = ['Edição digital, sem leitor de disco', 'Voltagem confirmada no WhatsApp antes do pedido'] + sp
+    NM = {74: 'PlayStation 5 Slim 1TB mídia física', 75: 'PlayStation 5 Slim 825GB digital'}
+    prods.append(dict(id=f"e{r['i']}", n=NM.get(r['i'], short(r['nome'])), c=CAT[r['cat']], p=r['preco'], img=im, m=mode, s=sp, t='enc'))
 for k, r in enumerate(SEM):
     im, mode = pimg(r['i'])
     prods.append(dict(id=f's{k}', n=short(r['nome']), c='seminovo', p=r['preco'], img=im, m=mode,
