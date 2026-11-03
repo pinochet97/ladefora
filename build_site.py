@@ -53,7 +53,9 @@ prods = []
 for r in PRE:
     if r['status'] == 'nao compensa' or 'Swap' in r['nome']: continue
     im, mode = pimg(r['i'])
-    prods.append(dict(id=f"e{r['i']}", n=short(r['nome']), c=CAT[r['cat']], p=r['preco'], img=im, m=mode, s=specs(r['i']), t='enc'))
+    sp = specs(r['i'])
+    if r['i'] == 7: sp = ['Versão com chip físico + eSIM'] + sp
+    prods.append(dict(id=f"e{r['i']}", n=short(r['nome']), c=CAT[r['cat']], p=r['preco'], img=im, m=mode, s=sp, t='enc'))
 for k, r in enumerate(SEM):
     im, mode = pimg(r['i'])
     prods.append(dict(id=f's{k}', n=short(r['nome']), c='seminovo', p=r['preco'], img=im, m=mode,
